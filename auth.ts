@@ -1,9 +1,19 @@
-import NextAuth from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-
+import { UserRole } from "@prisma/client";
 import { getUserById } from "@/data/user";
 import db from "@/lib/db";
 import authConfig from "@/auth.config";
+
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      role: UserRole;
+    } & DefaultSession["user"];
+  }
+}
+
 
 export const {
   handlers: { GET, POST },
@@ -12,11 +22,24 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
-    async session({ token, session }) {
-      console.log({ sessionToken: token, session });
 
+    // email not verified
+    // async signIn({ user }) {
+    //   const existingUser = await getUserById(user.id);
+
+    //   if (!existingUser || !existingUser.emailVerified) {
+    //     return false;
+    //   }
+    //   return true;
+    // },
+
+    async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
+      }
+
+      if (token.role && session.user) {
+        session.user.role = token.role as UserRole;
       }
       return session;
     },

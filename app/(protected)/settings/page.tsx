@@ -1,10 +1,11 @@
 import { auth, signOut } from "@/auth";
+import { Button } from "@/components/ui/button";
 
 const SettingsPage = async () => {
   const session = await auth();
   return (
     <div>
-      {JSON.stringify(session)}
+      <p className="text-white">{JSON.stringify(session)}</p>
       <form
         action={async () => {
           "use server";
@@ -12,7 +13,9 @@ const SettingsPage = async () => {
           await signOut();
         }}
       >
-        <button type="submit">Sign Out</button>
+        <Button type="submit" variant={"secondary"}>
+          Sign Out
+        </Button>
       </form>
     </div>
   );

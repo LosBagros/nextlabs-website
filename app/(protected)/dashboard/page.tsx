@@ -16,55 +16,9 @@ interface Room {
   image: string;
   description: string;
   difficulty: "Easy" | "Medium" | "Hard";
-  dockerContainer?: {
-    id: string;
-    image: string;
-    ip: string;
-    port: number;
-  };
 }
 
-const roomsJson: Room[] = [
-  {
-    id: "1",
-    title: "Lorem Ipsum",
-    image: "https://via.placeholder.com/150",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    difficulty: "Easy",
-    dockerContainer: {
-      id: "1",
-      image: "ubuntu",
-      ip: "192.168.1.1",
-      port: 8080,
-    },
-  },
-  {
-    id: "1",
-    title: "Lorem Ipsum",
-    image: "https://via.placeholder.com/150",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    difficulty: "Medium",
-    dockerContainer: {
-      id: "1",
-      image: "ubuntu",
-      ip: "192.168.1.1",
-      port: 8080,
-    },
-  },
-  {
-    id: "1",
-    title: "Lorem Ipsum",
-    image: "https://via.placeholder.com/150",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    difficulty: "Hard",
-    dockerContainer: {
-      id: "1",
-      image: "ubuntu",
-      ip: "192.168.1.1",
-      port: 8080,
-    },
-  },
-];
+const roomsJson: Room[] = [];
 
 async function getRooms() {
   await new Promise((resolve) => setTimeout(resolve, 1000));

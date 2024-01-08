@@ -45,3 +45,45 @@ model Account {
 
   @@unique([provider, providerAccountId])
 }
+
+model Room {
+  id String @id @default(cuid())
+  createdAt DateTime @default(now())
+  title String
+  imageUrl String?
+  description String?
+  difficulty Difficulty
+  containers  DockerTemplate[]
+}
+
+enum Difficulty {
+  Easy
+  Medium
+  Hard
+}
+
+
+model DockerTemplate {
+  id           String   @id @default(cuid())
+  name         String
+  image        String
+  internalPort Int
+  externalPort Int
+  roomId       String?
+  room         Room?          @relation(fields: [roomId], references: [id])
+}
+
+model DockerContainer {
+  id          String        @id @default(cuid())
+  userId      String
+  templateId  String
+  name         String
+  image        String
+  internalPort Int
+  externalPort Int
+  createdAt   DateTime      @default(now())
+  isActive    Boolean       @default(true)
+  roomId      String?
+
+  @@unique([userId, templateId])
+}

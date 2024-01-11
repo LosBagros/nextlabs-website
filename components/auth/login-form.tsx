@@ -47,8 +47,8 @@ export const LoginForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="Welcome Back"
-      backButtonLabel="Don't have an account?"
+      headerLabel="Přihlášení"
+      backButtonLabel="Nemáte účet? Zaregistrujte se!"
       backButtonHref="/auth/register"
       showSocial
     >
@@ -78,7 +78,7 @@ export const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Heslo</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -95,7 +95,7 @@ export const LoginForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button typeof="submit" className="w-full" disabled={isPending}>
-            Login
+            Přihlásit se!
           </Button>
         </form>
       </Form>

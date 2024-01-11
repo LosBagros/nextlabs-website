@@ -70,20 +70,20 @@ const Dashboard = async () => {
         {rooms.map((room) => (
           <Card key={room.id} className="flex flex-col justify-between">
             <CardHeader>
-              <CardTitle>{room.title}</CardTitle>
+              <CardTitle className="text-xl mx-auto">{room.title}</CardTitle>
               <Badge
                 className={cn({
                   "bg-green-600": room.difficulty === "Easy",
                   "bg-orange-600": room.difficulty === "Medium",
                   "bg-red-600": room.difficulty === "Hard",
-                  "w-min": true,
+                  "w-min mx-auto": true,
                 })}
               >
                 {room.difficulty}
               </Badge>
 
               <Image
-                className="rounded"
+                className="rounded mx-auto"
                 src={room.image}
                 width={600}
                 height={300}
@@ -94,7 +94,7 @@ const Dashboard = async () => {
               <CardDescription>{room.description}</CardDescription>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button>Vstoupit do Místnosti</Button>
+              <Button className="w-full">Vstoupit do Místnosti</Button>
             </CardFooter>
           </Card>
         ))}

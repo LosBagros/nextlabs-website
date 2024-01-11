@@ -48,8 +48,8 @@ export const RegisterForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="Create an account"
-      backButtonLabel="Already have an account?"
+      headerLabel="Registrace"
+      backButtonLabel="Máte účet? Přihlašte se!"
       backButtonHref="/auth/login"
       showSocial
     >
@@ -79,7 +79,7 @@ export const RegisterForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Jméno</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -97,7 +97,7 @@ export const RegisterForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Heslo</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -114,7 +114,7 @@ export const RegisterForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button typeof="submit" className="w-full" disabled={isPending}>
-            Register
+            Registrovat!
           </Button>
         </form>
       </Form>

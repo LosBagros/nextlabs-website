@@ -25,6 +25,7 @@ model User {
   password      String?
   role          UserRole  @default(USER)
   accounts      Account[]
+  Room          Room[]
 }
 
 model Account {
@@ -47,12 +48,16 @@ model Account {
 }
 
 model Room {
-  id String @id @default(cuid())
-  createdAt DateTime @default(now())
-  title String
-  imageUrl String?
+  id          String           @id @default(cuid())
+  createdAt   DateTime         @default(now())
+  title       String
+  imageUrl    String?
   description String?
-  difficulty Difficulty
+  difficulty  Difficulty
+  published   Boolean          @default(false)
+  author      User?            @relation(fields: [authorId], references: [id])
+  authorId    String?
+  content     String?
   containers  DockerTemplate[]
 }
 
@@ -62,28 +67,27 @@ enum Difficulty {
   Hard
 }
 
-
 model DockerTemplate {
-  id           String   @id @default(cuid())
+  id           String  @id @default(cuid())
   name         String
   image        String
   internalPort Int
   externalPort Int
   roomId       String?
-  room         Room?          @relation(fields: [roomId], references: [id])
+  room         Room?   @relation(fields: [roomId], references: [id])
 }
 
 model DockerContainer {
-  id          String        @id @default(cuid())
-  userId      String
-  templateId  String
+  id           String   @id @default(cuid())
+  userId       String
+  templateId   String
   name         String
   image        String
   internalPort Int
   externalPort Int
-  createdAt   DateTime      @default(now())
-  isActive    Boolean       @default(true)
-  roomId      String?
+  createdAt    DateTime @default(now())
+  isActive     Boolean  @default(true)
+  roomId       String?
 
   @@unique([userId, templateId])
 }

@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 interface Room {
   id: string;
@@ -20,6 +21,7 @@ interface Room {
   image: string;
   description: string;
   difficulty: "Easy" | "Medium" | "Hard";
+  slug: string;
 }
 
 const fallbackImage = "https://placekitten.com/300/300";
@@ -32,6 +34,7 @@ const roomsJson: Room[] = [
     description:
       "Příliš žluťoučký kůň úpěl ďábelské ódy. Vlk zdrhl, buřt pěl. Chmýří plná žížala četla v údolí čínské básně. Běžící veverka překvapivě vyhrála kvíz o životě v lesní čistině.",
     difficulty: "Easy",
+    slug: "room-1",
   },
   {
     id: "2",
@@ -40,6 +43,7 @@ const roomsJson: Room[] = [
     description:
       "Čtyři strakapoudi řešili hádanku o šťavnatých hmyzích larvách pod kůrou starého dubu. Měsíční svit kreslil stíny na zvlněnou hladinu rybníka, kde se stříbrné ryby tichounce pohupovaly mezi vodními rostlinami.",
     difficulty: "Medium",
+    slug: "room-2",
   },
   {
     id: "3",
@@ -48,6 +52,7 @@ const roomsJson: Room[] = [
     description:
       "Jelen šumavský z pozorovatelny skrytě sleduje hravé veverky, zatímco slunce zapadá za kopce, kreslící dlouhé stíny mezi stromy. Na obzoru se pomalu rozsvěcují první hvězdy, zatímco osamělý myslivec vypráví příběhy o starých legendách lesa.",
     difficulty: "Hard",
+    slug: "room-3",
   },
 ];
 
@@ -94,7 +99,9 @@ const Dashboard = async () => {
               <CardDescription>{room.description}</CardDescription>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button className="w-full">Vstoupit do Místnosti</Button>
+              <Link href={room.slug}>
+                <Button className="w-full">Vstoupit do Místnosti</Button>
+              </Link>
             </CardFooter>
           </Card>
         ))}

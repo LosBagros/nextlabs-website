@@ -14,7 +14,7 @@ const SettingsPage = async () => {
         }}
       >
         <Button type="submit" variant={"secondary"}>
-          Sign Out
+          Odhlásit se!
         </Button>
       </form>
     </div>

@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,12 +5,6 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
-}
-
-enum UserRole {
-  USER
-  TEACHER
-  ADMIN
 }
 
 model User {
@@ -41,30 +32,27 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId], map: "Account_userId_fkey")
 }
 
 model Room {
   id          String           @id @default(cuid())
   createdAt   DateTime         @default(now())
-  title       String
+  name        String
   imageUrl    String?
   description String?
   difficulty  Difficulty
   published   Boolean          @default(false)
-  author      User?            @relation(fields: [authorId], references: [id])
   authorId    String?
   content     String?
+  slug        String           @unique
   containers  DockerTemplate[]
-}
+  author      User?            @relation(fields: [authorId], references: [id])
 
-enum Difficulty {
-  Easy
-  Medium
-  Hard
+  @@index([authorId], map: "Room_authorId_fkey")
 }
 
 model DockerTemplate {
@@ -75,6 +63,8 @@ model DockerTemplate {
   externalPort Int
   roomId       String?
   room         Room?   @relation(fields: [roomId], references: [id])
+
+  @@index([roomId], map: "DockerTemplate_roomId_fkey")
 }
 
 model DockerContainer {
@@ -90,4 +80,16 @@ model DockerContainer {
   roomId       String?
 
   @@unique([userId, templateId])
+}
+
+enum UserRole {
+  USER
+  TEACHER
+  ADMIN
+}
+
+enum Difficulty {
+  Easy
+  Medium
+  Hard
 }

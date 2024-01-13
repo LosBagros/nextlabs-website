@@ -24,3 +24,10 @@ export const apiAuthPrefix = "/api/auth";
  * @type {string}
  */
 export const DEFAULT_LOGIN_REDIRECT = "/dashboard";
+
+
+/**
+ * Admin protected routes
+ * @type {string}
+ */
+export const adminRoutes = ["/admin", "/dashboard/create"];

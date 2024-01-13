@@ -14,68 +14,58 @@ import Image from "next/image";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import db from "@/lib/db";
 
-interface Room {
-  id: string;
-  title: string;
-  image: string;
-  description: string;
-  difficulty: "Easy" | "Medium" | "Hard";
-  slug: string;
-}
+import { ImLab } from "react-icons/im";
+import { Poppins } from "next/font/google";
+
+const font = Poppins({
+  subsets: ["latin"],
+  weight: ["600"],
+});
 
 const fallbackImage = "https://placekitten.com/300/300";
 
-const roomsJson: Room[] = [
-  {
-    id: "1",
-    title: "Room 1",
-    image: "https://placekitten.com/600/300",
-    description:
-      "Příliš žluťoučký kůň úpěl ďábelské ódy. Vlk zdrhl, buřt pěl. Chmýří plná žížala četla v údolí čínské básně. Běžící veverka překvapivě vyhrála kvíz o životě v lesní čistině.",
-    difficulty: "Easy",
-    slug: "room-1",
-  },
-  {
-    id: "2",
-    title: "Room 2",
-    image: "https://placekitten.com/600/300",
-    description:
-      "Čtyři strakapoudi řešili hádanku o šťavnatých hmyzích larvách pod kůrou starého dubu. Měsíční svit kreslil stíny na zvlněnou hladinu rybníka, kde se stříbrné ryby tichounce pohupovaly mezi vodními rostlinami.",
-    difficulty: "Medium",
-    slug: "room-2",
-  },
-  {
-    id: "3",
-    title: "Room 3",
-    image: "https://placekitten.com/600/300",
-    description:
-      "Jelen šumavský z pozorovatelny skrytě sleduje hravé veverky, zatímco slunce zapadá za kopce, kreslící dlouhé stíny mezi stromy. Na obzoru se pomalu rozsvěcují první hvězdy, zatímco osamělý myslivec vypráví příběhy o starých legendách lesa.",
-    difficulty: "Hard",
-    slug: "room-3",
-  },
-];
-
-async function getRooms() {
-  // await new Promise((resolve) => setTimeout(resolve, 1000));
-  return roomsJson;
-}
+const roomPrefix = "/room/";
 
 const Dashboard = async () => {
-  const rooms = await getRooms();
   const session = await auth();
+  const rooms = await db.room.findMany({
+    where: {
+      published: true,
+    },
+  });
 
   return (
     <div className="max-w-6xl mx-auto">
       <br></br> {/* NEUMIM CSS */}
-      <h1 className="flex flex-col items-center text-6xl font-semibold m-4 text-white">
-        Rooms
-      </h1>
+      <nav className="flex items-center rounded bg-white m-6">
+        <div className="flex felx-row items-center m-4 p-2">
+          <ImLab size={35} className="text-black mr-2" />
+          <h1
+            className={cn(
+              "text-5xl font-semibold text-black drop-shadow-md",
+              font.className
+            )}
+          >
+            NextLabs
+          </h1>
+        </div>
+        <Avatar className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <AvatarImage src={session?.user.image || fallbackImage} />
+          <AvatarFallback>
+            {session?.user.name
+              ?.toUpperCase()
+              .match(/\b(\w)/g)
+              ?.join("") || "??"}
+          </AvatarFallback>
+        </Avatar>
+      </nav>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 m-6">
         {rooms.map((room) => (
           <Card key={room.id} className="flex flex-col justify-between">
             <CardHeader>
-              <CardTitle className="text-xl mx-auto">{room.title}</CardTitle>
+              <CardTitle className="text-xl mx-auto">{room.name}</CardTitle>
               <Badge
                 className={cn({
                   "bg-green-600": room.difficulty === "Easy",
@@ -89,17 +79,17 @@ const Dashboard = async () => {
 
               <Image
                 className="rounded mx-auto"
-                src={room.image}
+                src={room.imageUrl || fallbackImage}
                 width={600}
                 height={300}
-                alt={"Image of " + room.title}
+                alt={"Image of " + room.name}
               />
             </CardHeader>
             <CardContent>
               <CardDescription>{room.description}</CardDescription>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Link href={room.slug}>
+              <Link href={roomPrefix + room.slug} className="w-full">
                 <Button className="w-full">Vstoupit do Místnosti</Button>
               </Link>
             </CardFooter>
@@ -107,15 +97,6 @@ const Dashboard = async () => {
         ))}
       </div>
       <div className="flex flex-col items-center">
-        <Avatar className="mb-3 ">
-          <AvatarImage src={session?.user.image || fallbackImage} />
-          <AvatarFallback>
-            {session?.user.name
-              ?.toUpperCase()
-              .match(/\b(\w)/g)
-              ?.join("") || "??"}
-          </AvatarFallback>
-        </Avatar>
         <form
           action={async () => {
             "use server";
@@ -124,7 +105,7 @@ const Dashboard = async () => {
           }}
         >
           <Button type="submit" variant={"secondary"}>
-            Sign Out
+            Odhlásit se!
           </Button>
         </form>
       </div>

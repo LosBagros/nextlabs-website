@@ -21,13 +21,10 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript />
       </head>
-      <body
-        className={
-          inter.className +
-          "h-full bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black"
-        }
-      >
-        <MantineProvider>{children}</MantineProvider>
+      <body className={inter.className}>
+        <div className="absolute h-full w-full bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black">
+          <MantineProvider>{children}</MantineProvider>
+        </div>
       </body>
     </html>
   );

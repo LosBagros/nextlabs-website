@@ -1,14 +1,17 @@
 import authConfig from "@/auth.config";
 import NextAuth from "next-auth";
-import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, publicRoutes} from "@/routes";
+import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, publicRoutes, adminRoutes} from "@/routes";
 
 const { auth } = NextAuth(authConfig);
+
 
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
+  // const isAdmin = req.auth?.user.role === "ADMIN"; // Dokáže to bořek stavitel opravit? NE!
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
@@ -26,6 +29,10 @@ export default auth((req) => {
   if (!isLoggedIn && !isPublicRoute) {
     return Response.redirect(new URL("/auth/login", nextUrl));
   }
+
+  // if (!isAdmin && isAdminRoute) {
+  //   return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+  // }
 
   return null;
 });

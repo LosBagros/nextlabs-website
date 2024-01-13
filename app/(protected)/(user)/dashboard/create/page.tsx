@@ -3,9 +3,12 @@ import { CreateRoomForm } from "@/components/create-room-form";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { redirect } from "next/navigation";
 
+import { UserRole } from "@prisma/client";
+import { currentRole } from "@/lib/auth";
+
 const CreateRoom = async () => {
-  const session = await auth();
-  if (session && session?.user.role !== "ADMIN") {
+  const role = await currentRole();
+  if (role !== UserRole.ADMIN) {
     return redirect(DEFAULT_LOGIN_REDIRECT);
   }
 

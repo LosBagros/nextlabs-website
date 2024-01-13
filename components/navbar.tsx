@@ -1,11 +1,21 @@
-import React from "react";
+import { ImLab } from "react-icons/im";
+import { Poppins } from "next/font/google";
+import UserButton from "@/components/user-button";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import CreateRoomButton from "@/components/create-room-button";
+
+const font = Poppins({
+  subsets: ["latin"],
+  weight: ["600"],
+});
 
 const Navbar = () => {
   return (
-    <div className="max-w-6xl mx-auto">
+    <div>
       <br></br> {/* NEUMIM CSS */}
-      <nav className="flex items-center justify-between rounded-2xl bg-white m-6 px-8">
-        <div className="flex items-center m-4">
+      <nav className="flex items-center justify-between rounded-2xl bg-white mb-6 px-10">
+        <Link href="/dashboard" className="flex items-center m-4">
           <ImLab size={35} className="text-black mr-2" />
           <h1
             className={cn(
@@ -15,7 +25,8 @@ const Navbar = () => {
           >
             NextLabs
           </h1>
-        </div>
+        </Link>
+        <CreateRoomButton />
         <UserButton />
       </nav>
     </div>

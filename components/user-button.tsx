@@ -24,7 +24,9 @@ export default async function UserButton() {
                 alt={session.user.name ?? ""}
               />
             )}
-            <AvatarFallback>{session.user.email}</AvatarFallback>
+            <AvatarFallback>
+              {session.user.name ?? session.user.email}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

@@ -47,7 +47,7 @@ model Room {
   difficulty  Difficulty
   published   Boolean          @default(false)
   authorId    String?
-  content     String?
+  content     String?          @db.Text
   slug        String           @unique
   containers  DockerTemplate[]
   author      User?            @relation(fields: [authorId], references: [id])

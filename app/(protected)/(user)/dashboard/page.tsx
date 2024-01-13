@@ -18,6 +18,7 @@ import db from "@/lib/db";
 
 import { ImLab } from "react-icons/im";
 import { Poppins } from "next/font/google";
+import UserButton from "@/components/user-button";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -39,8 +40,8 @@ const Dashboard = async () => {
   return (
     <div className="max-w-6xl mx-auto">
       <br></br> {/* NEUMIM CSS */}
-      <nav className="flex items-center rounded bg-white m-6">
-        <div className="flex felx-row items-center m-4 p-2">
+      <nav className="flex items-center justify-between rounded-2xl bg-white m-6 px-8">
+        <div className="flex items-center m-4">
           <ImLab size={35} className="text-black mr-2" />
           <h1
             className={cn(
@@ -51,15 +52,7 @@ const Dashboard = async () => {
             NextLabs
           </h1>
         </div>
-        <Avatar className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <AvatarImage src={session?.user.image || fallbackImage} />
-          <AvatarFallback>
-            {session?.user.name
-              ?.toUpperCase()
-              .match(/\b(\w)/g)
-              ?.join("") || "??"}
-          </AvatarFallback>
-        </Avatar>
+        <UserButton />
       </nav>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 m-6">
         {rooms.map((room) => (
@@ -95,19 +88,6 @@ const Dashboard = async () => {
             </CardFooter>
           </Card>
         ))}
-      </div>
-      <div className="flex flex-col items-center">
-        <form
-          action={async () => {
-            "use server";
-
-            await signOut();
-          }}
-        >
-          <Button type="submit" variant={"secondary"}>
-            Odhlásit se!
-          </Button>
-        </form>
       </div>
     </div>
   );

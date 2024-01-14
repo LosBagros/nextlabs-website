@@ -19,7 +19,7 @@ const Navbar = () => {
           <ImLab size={35} className="text-black mr-2" />
           <h1
             className={cn(
-              "text-5xl font-semibold text-black drop-shadow-md",
+              "text-4xl sm:text-5xl font-semibold text-black drop-shadow-md",
               font.className
             )}
           >

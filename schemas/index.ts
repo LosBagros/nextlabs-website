@@ -19,7 +19,7 @@ export const RoomSchema = z.object({
   description: z.string(),
   difficulty: z.enum(["Easy", "Medium", "Hard"]),
   content : z.string(),
-  slug: z.string(),
+  slug: z.string().min(1, { message: "Slug is required" }),
   published: z.boolean(),
   // TODO: docker validation
 });

@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import { CreateRoomForm } from "@/components/create-room-form";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { redirect } from "next/navigation";

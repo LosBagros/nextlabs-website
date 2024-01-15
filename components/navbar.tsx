@@ -3,7 +3,6 @@ import { Poppins } from "next/font/google";
 import UserButton from "@/components/user-button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import CreateRoomButton from "./create-room-button";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -28,7 +27,6 @@ const Navbar = () => {
         </Link>
         <UserButton />
       </nav>
-      <CreateRoomButton />
     </div>
   );
 };

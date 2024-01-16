@@ -11,7 +11,7 @@ const SkeletonCard = () => {
     <Card className="flex flex-col justify-between">
       <CardHeader>
         <Skeleton className="h-6 w-1/3 mx-auto" />
-        <Skeleton className="h-4 w-1/6 mx-auto mt-2-" />
+        <Skeleton className="h-4 w-1/6 mx-auto mt-2" />
         <Skeleton className="h-72 w-full" />
       </CardHeader>
       <CardContent>
@@ -20,7 +20,7 @@ const SkeletonCard = () => {
         <Skeleton className="h-4 w-1/2 mt-2" />
       </CardContent>
       <CardFooter>
-        <Skeleton className="h-10 w-full  " />
+        <Skeleton className="h-10 w-full" />
       </CardFooter>
     </Card>
   );

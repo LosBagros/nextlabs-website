@@ -42,7 +42,7 @@ model Room {
   id          String           @id @default(cuid())
   createdAt   DateTime         @default(now())
   name        String
-  imageUrl    String?
+  imageUrl    String?          @db.Text
   description String?
   difficulty  Difficulty
   published   Boolean          @default(false)

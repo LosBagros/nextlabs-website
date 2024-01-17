@@ -51,7 +51,7 @@ export default async function RoomTest({
         height={300}
         className="m-4 rounded-lg mx-auto"
       />
-      <p className="text-gray-600 mt-2">{room.content}</p>
+      <p className="text-gray-600 mt-2 truncate">{room.content}</p>
     </div>
   );
 }

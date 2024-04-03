@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import LabCard from "@/components/lab-card";
 
 export default async function RoomTest({
   params,
@@ -52,6 +53,8 @@ export default async function RoomTest({
         className="m-4 rounded-lg mx-auto"
       />
       <p className="text-gray-600 mt-2 truncate">{room.content}</p>
+
+      <LabCard />
     </div>
   );
 }

@@ -6,9 +6,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SignIn, SignOut } from "@/components/auth-components";
+import Link from "next/link";
 
 export default async function UserButton() {
   const session = await auth();
@@ -42,6 +44,11 @@ export default async function UserButton() {
               </p>
             </div>
           </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <Link href="/settings">Settings</Link>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem>
             <SignOut />
           </DropdownMenuItem>

@@ -5,7 +5,7 @@ const UsersTable = async () => {
     select: { name: true, email: true },
   });
   return (
-    <div className="m-12 mx-auto w-2/3 bg-slate-200 rounded">
+    <div className="m-12 mx-auto max-w-6xl p-4 bg-slate-200 rounded">
       <SettingsPage data={users ?? []} />
     </div>
   );

@@ -56,7 +56,7 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
 function filterData(data: RowData[], search: string) {
   const query = search.toLowerCase().trim();
   return data.filter((item) =>
-    keys(data[0]).some((key) => item[key].toLowerCase().includes(query))
+    keys(data[0]).some((key) => item[key]?.toLowerCase().includes(query))
   );
 }
 
@@ -73,10 +73,10 @@ function sortData(
   return filterData(
     [...data].sort((a, b) => {
       if (payload.reversed) {
-        return b[sortBy].localeCompare(a[sortBy]);
+        return (b[sortBy] ?? "").localeCompare(a[sortBy] ?? "");
       }
 
-      return a[sortBy].localeCompare(b[sortBy]);
+      return (a[sortBy] ?? "").localeCompare(b[sortBy] ?? "");
     }),
     payload.search
   );

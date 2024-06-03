@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      {   
+      {
         protocol: "https",
         hostname: "**",
       },
@@ -11,6 +11,14 @@ const nextConfig = {
         hostname: "**",
       },
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/base/:path*",
+        destination: "/base/:path*/index.html",
+      },
+    ];
   },
 };
 

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 import "@/app/globals.css";
+import "@mantine/core/styles.css";
+
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
 import Navbar from "@/components/navbar";
 
@@ -15,11 +18,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body>
-        <div className="flex flex-col max-w-6xl mx-auto min-h-screen p-6">
-          <Navbar />
-          {children}
-        </div>
+        <MantineProvider>
+          <div className="max-w-6xl p-4 mx-auto">
+            <Navbar />
+            {children}
+          </div>
+        </MantineProvider>
       </body>
     </html>
   );

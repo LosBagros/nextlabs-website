@@ -11,14 +11,7 @@ const nextConfig = {
         hostname: "**",
       },
     ],
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/base/:path*",
-        destination: "/base/:path*/index.html",
-      },
-    ];
+    dangerouslyAllowSVG: true,
   },
 };
 

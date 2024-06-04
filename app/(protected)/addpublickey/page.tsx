@@ -18,17 +18,20 @@ import { FormSchema } from "@/schemas";
 import { addKey } from "@/actions/addKey";
 import { useTransition } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { listKey } from "@/actions/addKey";
+// import { listKey } from "@/actions/addKey";
 import { toast } from "@/components/ui/use-toast";
 
 export function ProfileForm() {
   const [isPending, startTransition] = useTransition();
 
-  listKey().then((key) => {
-    if (key) {
-      form.setValue("sshPublicKey", key);
-    }
-  });
+  //  ⨯ Error: Server Functions cannot be called during initial render.
+  // This would create a fetch waterfall.
+  // Try to use a Server Component to pass data to Client Components instead.
+  // listKey().then((key) => {
+  //   if (key) {
+  //     form.setValue("sshPublicKey", key);
+  //   }
+  // });
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),

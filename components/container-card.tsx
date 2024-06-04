@@ -7,17 +7,55 @@ import {
   restartContainer,
   deleteContainer,
 } from "@/actions/containerActions";
+import { toast } from "@/components/ui/use-toast";
+import { useTransition } from "react";
+import { Button } from "@/components/ui/button";
 
 interface ContainerCardProps {
   container: Container;
 }
 
 const ContainerCard: React.FC<ContainerCardProps> = ({ container }) => {
+  const [isPending, startTransition] = useTransition();
+
   const runningClass = container.running ? "bg-green-50" : "bg-red-50";
   const runningText = container.running ? "Yes" : "No";
   const runningTextColor = container.running
     ? "text-green-700"
     : "text-red-700";
+
+  function deleteSlef() {
+    startTransition(() => {
+      deleteContainer(container).then(() => {
+        toast({
+          title: "Container deleted",
+          variant: "destructive",
+        });
+      });
+    });
+  }
+  function startSelf() {
+    startTransition(() => {
+      startContainer(container);
+    });
+  }
+
+  function stopSelf() {
+    startTransition(() => {
+      stopContainer(container);
+    });
+  }
+
+  function restartSelf() {
+    startTransition(() => {
+      restartContainer(container).then(() => {
+        toast({
+          title: `Container "${container.name}" is restarting`,
+          description: "Please wait a moment.",
+        });
+      });
+    });
+  }
 
   return (
     <div
@@ -42,30 +80,34 @@ const ContainerCard: React.FC<ContainerCardProps> = ({ container }) => {
         </p>
       </div>
       <div className="px-6 py-4 flex justify-between space-x-2">
-        <button
-          onClick={() => startContainer(container)}
+        <Button
+          disabled={isPending}
+          onClick={() => startSelf()}
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
         >
           Start
-        </button>
-        <button
-          onClick={() => stopContainer(container)}
+        </Button>
+        <Button
+          disabled={isPending}
+          onClick={() => stopSelf()}
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
         >
           Stop
-        </button>
-        <button
-          onClick={() => restartContainer(container)}
+        </Button>
+        <Button
+          disabled={isPending}
+          onClick={() => restartSelf()}
           className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-1 px-2 rounded"
         >
           Restart
-        </button>
-        <button
-          onClick={() => deleteContainer(container)}
+        </Button>
+        <Button
+          disabled={isPending}
+          onClick={() => deleteSlef()}
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
         >
           Delete
-        </button>
+        </Button>
       </div>
     </div>
   );

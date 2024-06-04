@@ -3,7 +3,6 @@ import { Container } from "@/schemas/types";
 import ContainerCard from "@/components/container-card";
 import { redirect } from "next/navigation";
 import CreateLab from "@/components/create-container";
-import { toast } from "@/components/ui/use-toast";
 
 const Account = async () => {
   "use server";
@@ -38,9 +37,9 @@ const Account = async () => {
   const containers: Container[] = await response.json();
 
   return (
-    <div className="flex flex-grow bg-white rounded-2xl p-4">
-      <div>
-        <div className="">
+    <div className="flex flex-grow bg-white rounded-2xl p-4 w-full">
+      <div className="w-full  ">
+        <div>
           <h2 className="text-2xl font-bold px-4 w-full text-center">
             My Containers
           </h2>

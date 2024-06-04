@@ -23,6 +23,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { createContainer } from "@/actions/containerActions";
 import { useTransition } from "react";
+import { auth } from "@/auth";
 
 const FormSchema = z.object({
   image: z.string({

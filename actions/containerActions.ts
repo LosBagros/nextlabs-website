@@ -76,7 +76,7 @@ const deleteContainer = async (container: Container) => {
     }
   );
 
-  revalidateTag("deleteContainer");
+  revalidateTag("collection");
 };
 
 const createContainer = async (userEmail: string, image: string) => {
@@ -109,9 +109,7 @@ const createContainer = async (userEmail: string, image: string) => {
   );
 
   revalidateTag("collection");
-  if (response.ok) {
-    return response.json();
-  }
+  return response.json();
 };
 
 export {

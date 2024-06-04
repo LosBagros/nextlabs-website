@@ -45,9 +45,16 @@ export default async function UserButton() {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {/* <DropdownMenuItem>
-            <Link href="/settings">Settings</Link>
-          </DropdownMenuItem> */}
+          <DropdownMenuItem>
+            <Link href="/account" className="w-full h-full">
+              Account
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/addpublickey" className="w-full h-full">
+              SSH Key
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <SignOut />

@@ -10,7 +10,7 @@ import {
 
 const { auth } = NextAuth(authConfig);
 
-export default auth((req) => {
+export default auth(async (req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   // const isAdmin = req.auth?.user.role === "ADMIN"; // Dokáže to bořek stavitel opravit? NE!
@@ -23,6 +23,14 @@ export default auth((req) => {
   if (isApiAuthRoute) {
     return null;
   }
+
+  // auth-js don't work as expected
+  // if (isLoggedIn) {
+  //   console.log("user", req.auth?.user);
+  //   if (!req.auth?.user.sshPublicKey && "/addpublickey" !== nextUrl.pathname) {
+  //     return Response.redirect(new URL("/addpublickey", nextUrl));
+  //   }
+  // }
 
   if (isAuthRoute) {
     if (isLoggedIn) {

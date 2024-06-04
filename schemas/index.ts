@@ -15,11 +15,17 @@ export const RegisterSchema = z.object({
 
 export const RoomSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
-  imageUrl: z.string().url({ message: "Invalid image URL"}),
+  imageUrl: z.string().url({ message: "Invalid image URL" }),
   description: z.string(),
   difficulty: z.enum(["Easy", "Medium", "Hard"]),
-  content : z.string(),
+  content: z.string(),
   slug: z.string().min(1, { message: "Slug is required" }),
   published: z.boolean(),
   // TODO: docker validation
+});
+
+export const FormSchema = z.object({
+  sshPublicKey: z.string().min(60, {
+    message: "Not valid SSH public key.",
+  }),
 });

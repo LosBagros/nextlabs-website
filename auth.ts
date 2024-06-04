@@ -5,15 +5,15 @@ import { getUserById } from "@/data/user";
 import db from "@/lib/db";
 import authConfig from "@/auth.config";
 
-
+export type ExtendedUser = DefaultSession["user"] & {
+  role: UserRole;
+  sshPublicKey: string;
+};
 declare module "next-auth" {
   interface Session {
-    user: {
-      role: UserRole;
-    } & DefaultSession["user"];
+    user: ExtendedUser;
   }
 }
-
 
 export const {
   handlers: { GET, POST },
@@ -22,7 +22,6 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
-
     // email not verified
     // async signIn({ user }) {
     //   const existingUser = await getUserById(user.id);
@@ -41,6 +40,11 @@ export const {
       if (token.role && session.user) {
         session.user.role = token.role as UserRole;
       }
+
+      if (token.sshPublicKey && session.user) {
+        session.user.sshPublicKey = token.sshPublicKey as string;
+      }
+
       return session;
     },
     async jwt({ token }) {
@@ -51,6 +55,7 @@ export const {
       if (!existingUser) return token;
 
       token.role = existingUser.role;
+      token.sshPublicKey = existingUser.sshPublicKey;
       return token;
     },
   },

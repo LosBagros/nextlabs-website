@@ -3,6 +3,7 @@ import { Container } from "@/schemas/types";
 import ContainerCard from "@/components/container-card";
 import { redirect } from "next/navigation";
 import CreateLab from "@/components/create-container";
+import DownloadVpn from "@/components/download-vpn";
 
 const Account = async () => {
   "use server";
@@ -38,12 +39,15 @@ const Account = async () => {
 
   return (
     <div className="flex flex-grow bg-white rounded-2xl p-4 w-full">
-      <div className="w-full  ">
+      <div className="w-full">
         <div>
           <h2 className="text-2xl font-bold px-4 w-full text-center">
             My Containers
           </h2>
-          <CreateLab userEmail={userEmail} />
+          <div className="flex m-2">
+            <CreateLab userEmail={userEmail} />
+            <DownloadVpn userEmail={userEmail} /> {/*  TODO: chci to doprava */}
+          </div>
         </div>
         <div className="flex flex-wrap gap-4">
           {containers.map((container) => (

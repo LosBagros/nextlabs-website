@@ -62,43 +62,38 @@ export default function CreateLab({ userEmail }: { userEmail: string }) {
   }
 
   return (
-    <div className="flex flex-row items-center space-x-4 mt-1 mb-4">
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-row items-center space-x-4"
-        >
-          <FormField
-            control={form.control}
-            name="image"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center space-x-2">
-                <FormLabel className="w-full mt-2">Start lab:</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  disabled={isPending}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select image" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="nextlabs:default">
-                      nextlabs:default
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage className="w-full" />
-              </FormItem>
-            )}
-          />
-          <Button className="mx-4 mt-2" type="submit" disabled={isPending}>
-            Submit
-          </Button>
-        </form>
-      </Form>
-    </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex">
+        <FormField
+          control={form.control}
+          name="image"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center">
+              <FormLabel className="w-full mt-2">Start lab:</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={isPending}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select image" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="nextlabs:default">
+                    nextlabs:default
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage className="w-full" />
+            </FormItem>
+          )}
+        />
+        <Button className="mx-4 mt-2" type="submit" disabled={isPending}>
+          Submit
+        </Button>
+      </form>
+    </Form>
   );
 }

@@ -44,9 +44,9 @@ const Account = async () => {
           <h2 className="text-2xl font-bold px-4 w-full text-center">
             My Containers
           </h2>
-          <div className="flex m-2">
+          <div className="flex m-2 justify-between">
             <CreateLab userEmail={userEmail} />
-            <DownloadVpn userEmail={userEmail} /> {/*  TODO: chci to doprava */}
+            <DownloadVpn userEmail={userEmail} />
           </div>
         </div>
         <div className="flex flex-wrap gap-4">

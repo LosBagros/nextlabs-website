@@ -69,7 +69,7 @@ export default function CreateLab({ userEmail }: { userEmail: string }) {
           name="image"
           render={({ field }) => (
             <FormItem className="flex flex-row items-center">
-              <FormLabel className="w-full mt-2">Start lab:</FormLabel>
+              <FormLabel className="w-full mt-2 mx-2">Start lab:</FormLabel>
               <Select
                 onValueChange={field.onChange}
                 defaultValue={field.value}

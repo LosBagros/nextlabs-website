@@ -21,7 +21,11 @@ const DownloadVpn = ({ userEmail }: { userEmail: string }) => {
   }
 
   return (
-    <Button onClick={() => getVpn()} disabled={isPending} className="mt-2">
+    <Button
+      onClick={() => getVpn()}
+      disabled={isPending}
+      className="mt-2 justify-end"
+    >
       {isPending ? (
         <div className="flex">
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />

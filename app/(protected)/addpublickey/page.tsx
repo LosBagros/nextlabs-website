@@ -21,7 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 // import { listKey } from "@/actions/addKey";
 import { toast } from "@/components/ui/use-toast";
 
-export function ProfileForm() {
+export default function ProfileForm() {
   const [isPending, startTransition] = useTransition();
 
   //  ⨯ Error: Server Functions cannot be called during initial render.
@@ -84,5 +84,3 @@ export function ProfileForm() {
     </Form>
   );
 }
-
-export default ProfileForm;

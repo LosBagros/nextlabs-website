@@ -41,14 +41,22 @@ export default function CreateLab({ userEmail }: { userEmail: string }) {
   function onSubmit(data: z.infer<typeof FormSchema>) {
     startTransition(() => {
       createContainer(userEmail, data.image).then((res) => {
-        toast({
-          title: "Started container:",
-          description: (
-            <pre className="overflow-x-auto">
-              {JSON.stringify(res, null, 2)}
-            </pre>
-          ),
-        });
+        if (res.error) {
+          toast({
+            title: "Error starting container",
+            description: res.error,
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Started container:",
+            description: (
+              <pre className="overflow-x-auto">
+                {JSON.stringify(res, null, 2)}
+              </pre>
+            ),
+          });
+        }
       });
     });
   }

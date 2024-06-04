@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <div>
       <nav className="flex items-center justify-between rounded-2xl bg-white my-6">
-        <Link href="/base" className="flex items-center ml-4 my-4">
+        <Link href="/dashboard" className="flex items-center ml-4 my-4">
           <ImLab size={35} className="text-black mr-2" />
           <h1
             className={cn(

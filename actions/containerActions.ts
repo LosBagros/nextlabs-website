@@ -98,6 +98,24 @@ const createContainer = async (userEmail: string, image: string) => {
 
   const public_key = user.sshPublicKey;
 
+  const containers = await fetch(
+    `${process.env.API_URL}/user/containers/?user_email=${userEmail}`,
+    {
+      headers: { secret: process.env.API_KEY },
+      next: { tags: ["collection", "deleteContainer"] },
+    }
+  );
+
+  if (!containers.ok) {
+    throw new Error(`HTTP error! status: ${containers.status}`);
+  }
+
+  const containerCount = (await containers.json()).length;
+
+  if (containerCount >= 3) {
+    return { error: "You have reached the maximum number of containers" };
+  }
+
   const response = await fetch(
     process.env.API_URL +
       `/containers/?email=${userEmail}&container_image=${image}&public_key=${public_key}`,

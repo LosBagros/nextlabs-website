@@ -1,0 +1,72 @@
+---
+title: Vítejte v NextLabs
+description: Krátký úvod.
+date: 2024-06-03
+author: Bagros
+published: true
+---
+
+# Úvod do NextLabs
+
+Ahoj, vítej v NextLabs
+
+## Co je NextLabs?
+
+NextLabs je platforma pro vzdělávání a testování v oblasti IT. Na této stránce můžete najít různé kurzy, testy a materiály, které vám pomohou zdokonalit vaše dovednosti v oblasti IT.
+
+**Krok 1: Připojení k VPN**
+
+1. Vygenerujte si svůj vpn client v [administraci](/account).
+1. Otevřete svou klientskou aplikaci VPN a připojte se ke svému serveru VPN.
+1. Po připojení ověřte, že máte přístup do lab sítě. V prohlížeči zkuste načíst webový server v lab síti [zde](http://10.0.0.3).
+
+**Krok 2: Vytvoření labu**
+
+Pokud jste se úspěšně připojili do VPN, můžete pokračovat vytvořením svého labu.
+
+V administraci si vyberte lab, který chcete vytvořit a klikněte na tlačítko "Start lab".
+Po chvíli se vám zobrazí informace o vašem labu, včetně IP adresy serveru. Tuto IP adresu budete potřebovat pro připojení k serveru pomocí SSH.
+
+Připojení k labu pomocí SSH:
+
+```
+ssh root@server_ip
+```
+
+**Krok 3: Aktualizace apt**
+
+1. Po přihlášení k labu použijte následující příkaz pro aktualizaci apt balíčků:
+
+```
+apt update
+```
+
+**Krok 4: Instalace Nginx webového serveru**
+
+Po aktualizaci apt použijte následující příkaz k instalaci webového serveru Nginx:
+
+```
+apt install nginx
+```
+
+Po aktualizaci spusťte Nginx pomocí následujícího příkazu:
+
+```
+nginx
+```
+
+**Krok 5: Nastavení vlastní HTML stránky**
+
+Použijte následující příkaz pro přesun do adresáře, kde jsou uloženy weby:
+
+```bash
+cd /var/www/html
+```
+
+Upravte defaultní soubor `index.nginx-debian.html` pomocí textového editoru nano:
+
+```
+nano index.nginx-debian.html
+```
+
+Poté v prohlížeči otevřete IP adresu vašeho serveru a uvidíte vaši novou HTML stránku.

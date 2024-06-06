@@ -1,5 +1,6 @@
 import { signIn, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 
 export function SignIn({
   provider,
@@ -22,7 +23,8 @@ export function SignOut(props: React.ComponentPropsWithRef<typeof Button>) {
     <form
       action={async () => {
         "use server";
-        await signOut();
+        await signOut({ redirectTo: "/auth/login" });
+        // redirect to /
       }}
       className="w-full"
     >

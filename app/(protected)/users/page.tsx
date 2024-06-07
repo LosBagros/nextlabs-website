@@ -1,7 +1,8 @@
 import SettingsPage from "@/components/ui/users-table";
+import db from "@/lib/db";
 
 const UsersTable = async () => {
-  const users = await prisma?.user.findMany({
+  const users = await db?.user.findMany({
     select: { name: true, email: true },
   });
   return (

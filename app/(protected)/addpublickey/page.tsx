@@ -71,7 +71,10 @@ export default function ProfileForm() {
                 />
               </FormControl>
               <FormDescription>
-                Paste your SSH public key here. It should start with `ssh-rsa`
+                Before you continue, please paste your SSH public key here. It
+                is required for ssh into your labs. Key should start with
+                `ssh-rsa`. You can find your SSH public key by running `cat
+                ~/.ssh/id_rsa.pub` in your terminal.
               </FormDescription>
               <FormMessage />
             </FormItem>

@@ -4,7 +4,13 @@ import { Button } from "@/components/ui/button";
 import { downloadVpn } from "@/actions/vpnActions";
 import { useTransition } from "react";
 
-const DownloadVpn = ({ userEmail }: { userEmail: string }) => {
+const DownloadVpn = ({
+  userEmail,
+  userName,
+}: {
+  userEmail: string;
+  userName: string;
+}) => {
   const [isPending, startTransition] = useTransition();
 
   function getVpn() {
@@ -13,7 +19,7 @@ const DownloadVpn = ({ userEmail }: { userEmail: string }) => {
         const element = document.createElement("a");
         const file = new Blob([data], { type: "text/plain" });
         element.href = URL.createObjectURL(file);
-        element.download = "nextlabs.ovpn";
+        element.download = `${userName}.ovpn`;
         document.body.appendChild(element);
         element.click();
       });

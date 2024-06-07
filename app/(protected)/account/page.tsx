@@ -14,9 +14,14 @@ const Account = async () => {
   const session = await auth();
   const userEmail = session?.user.email;
   const sshPublicKey = session?.user.sshPublicKey;
+  const userName = session?.user.name;
 
   if (!userEmail) {
     throw new Error("User email not found in session");
+  }
+
+  if (!userName) {
+    throw new Error("User name not found in session");
   }
 
   if (!sshPublicKey) {
@@ -46,7 +51,7 @@ const Account = async () => {
           </h2>
           <div className="flex m-2 justify-between">
             <CreateLab userEmail={userEmail} />
-            <DownloadVpn userEmail={userEmail} />
+            <DownloadVpn userEmail={userEmail} userName={userName} />
           </div>
         </div>
         <div className="flex flex-wrap gap-4">

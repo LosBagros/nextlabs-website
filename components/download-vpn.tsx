@@ -27,14 +27,10 @@ const DownloadVpn = ({
   }
 
   return (
-    <Button
-      onClick={() => getVpn()}
-      disabled={isPending}
-      className="mt-2 justify-end"
-    >
+    <Button onClick={() => getVpn()} disabled={isPending} className="m-2">
       {isPending ? (
         <div className="flex">
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          <Loader2 className="mr-2 mt-1 h-4 w-4 animate-spin" />
           Please wait
         </div>
       ) : (

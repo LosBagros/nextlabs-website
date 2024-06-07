@@ -9,9 +9,7 @@ const startContainer = async (container: Container) => {
   }
 
   await fetch(
-    process.env.API_URL +
-      "/containers/start/?container_hostname=" +
-      container.hostname,
+    `${process.env.API_URL}/containers/start/?container_hostname=${container.hostname}`,
     {
       method: "POST",
       headers: { secret: process.env.API_KEY },
@@ -28,9 +26,7 @@ const stopContainer = async (container: Container) => {
   }
 
   await fetch(
-    process.env.API_URL +
-      "/containers/stop/?container_hostname=" +
-      container.hostname,
+    `${process.env.API_URL}/containers/stop/?container_hostname=${container.hostname}`,
     {
       method: "POST",
       headers: { secret: process.env.API_KEY },
@@ -47,9 +43,7 @@ const restartContainer = async (container: Container) => {
   }
 
   await fetch(
-    process.env.API_URL +
-      "/containers/restart/?container_hostname=" +
-      container.hostname,
+    `${process.env.API_URL}/containers/restart/?container_hostname=${container.hostname}`,
     {
       method: "POST",
       headers: { secret: process.env.API_KEY },
@@ -66,9 +60,7 @@ const deleteContainer = async (container: Container) => {
   }
 
   await fetch(
-    process.env.API_URL +
-      "/containers/?container_hostname=" +
-      container.hostname,
+    `${process.env.API_URL}/containers/?container_hostname=${container.hostname}`,
     {
       method: "DELETE",
       headers: { secret: process.env.API_KEY },
@@ -130,10 +122,23 @@ const createContainer = async (userEmail: string, image: string) => {
   return response.json();
 };
 
+const listImages = async () => {
+  if (process.env.API_KEY == null) {
+    throw new Error("API_URL is not defined");
+  }
+
+  const response = await fetch(process.env.API_URL + "/images/", {
+    headers: { secret: process.env.API_KEY },
+  });
+
+  return response.json();
+};
+
 export {
   startContainer,
   stopContainer,
   restartContainer,
   deleteContainer,
   createContainer,
+  listImages,
 };

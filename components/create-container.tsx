@@ -23,7 +23,6 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { createContainer } from "@/actions/containerActions";
 import { useTransition } from "react";
-import { auth } from "@/auth";
 
 const FormSchema = z.object({
   image: z.string({
@@ -31,7 +30,13 @@ const FormSchema = z.object({
   }),
 });
 
-export default function CreateLab({ userEmail }: { userEmail: string }) {
+export default function CreateLab({
+  userEmail,
+  images,
+}: {
+  userEmail: string;
+  images: string[];
+}) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -63,13 +68,13 @@ export default function CreateLab({ userEmail }: { userEmail: string }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex space-x-2">
         <FormField
           control={form.control}
           name="image"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-center">
-              <FormLabel className="w-full mt-2 mx-2">Start lab:</FormLabel>
+            <FormItem className="flex flex-row space-y-0  space-x-2 items-center">
+              <FormLabel className="w-full ">Start lab:</FormLabel>
               <Select
                 onValueChange={field.onChange}
                 defaultValue={field.value}
@@ -81,16 +86,18 @@ export default function CreateLab({ userEmail }: { userEmail: string }) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="nextlabs:default">
-                    nextlabs:default
-                  </SelectItem>
+                  {images.map((image: string) => (
+                    <SelectItem key={image} value={image}>
+                      {image}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormMessage className="w-full" />
             </FormItem>
           )}
         />
-        <Button className="mx-4 mt-2" type="submit" disabled={isPending}>
+        <Button type="submit" disabled={isPending}>
           Submit
         </Button>
       </form>

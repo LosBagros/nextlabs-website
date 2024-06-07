@@ -10,7 +10,7 @@ import {
 
 const { auth } = NextAuth(authConfig);
 
-export default auth((req) => {
+export default auth(async (req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   // const isAdmin = req.auth?.user.role === "ADMIN"; // Dokáže to bořek stavitel opravit? NE!

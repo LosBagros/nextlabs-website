@@ -23,5 +23,7 @@ Předpokládáme, že backend už běží.
 3. Nainstalujte knihovny `npm install`
 4. Vytvořte prisma clienta `npx prisma generate`
 5. Vytvořte databázi `npx prisma db push` (pokud nemáte root práva, bude potřeba vytvořit shadow databázi pro migrace, více v [prisma dokumentaci](https://www.prisma.io/docs/orm/prisma-migrate/understanding-prisma-migrate/shadow-database))
-6. Spusťte server `npm run dev`
+6. Developer server `npm run dev`
 7. Otevřete si aplikaci na `http://localhost:3000`
+
+Build pomocí `npm run build` a spuštění pomocí `npm run start`

@@ -7,7 +7,7 @@ Projekt je rozdělen na dvě části:
 - Externí api - FastAPI - ovládá docker kontejnery
 - Controll panel - Next.js - frontend a správa uživatelů
 
-Databáze slouží jen pro e
+Databáze slouží jen pro authentifikaci uživatelů.
 
 ## Navod na instalaci
 

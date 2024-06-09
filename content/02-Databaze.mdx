@@ -1,0 +1,53 @@
+---
+title: Databáze
+description: Vytvoření a připojení k databázi.
+date: 2024-06-03
+author: Bagros
+published: true
+image: /img/database.svg
+---
+
+# Databáze
+
+Pojďme si vytvořit databázi a připojit se k ní.
+
+## Vytvoření databáze
+
+1. V [administraci](/account) si vytvoříme databázový lab `nextlabs:mariadb`.
+2. Počkejte, až se lab vytvoří. (Počkejte tak 30 vteřin.)
+3. Po vytvoření se vám zobrazí informace o labu.
+
+<span class="text-red-700 font-bold">
+  Důležité: Lab se po hodině automaticky zastaví.
+</span>
+
+![Database lab](/img/db-lab.webp)
+
+Do databáze se můžete připojit pomocí následujících údajů:
+
+```
+host: `ip_labu`
+username: `root`
+password: `nextlabs`
+port: `3306`
+```
+
+## Připojení k databázi
+
+Pro připojení k databázi můžete využít <a href="https://phpmyadmin.nextlabs.cz" target="_blank">phpMyAdmin</a> nebo <a href="https://adminer.nextlabs.cz" target="_blank">adminer</a>
+
+Nebo přes CLI pomocí následujícího příkazu:
+
+```bash
+mysql -h ip_labu -u root -pnextlabs
+```
+
+<span class="text-red-700 font-bold">
+  Důležité: Po připojení k databázi změňte heslo uživatele `root`.
+</span>
+
+```sql
+SET PASSWORD FOR 'root'@'%' = PASSWORD('nove_heslo');
+```
+
+Gratulace! Úspěšně jste vytvořili databázi a připojili se k ní!

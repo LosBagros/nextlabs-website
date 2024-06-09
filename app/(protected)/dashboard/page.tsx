@@ -38,13 +38,13 @@ export default function Page() {
         {posts.map((post) => (
           <div key={post.slug}>
             <Link href={`/room/${post.slug}`}>
-              <div className="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+              <div className="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4 ">
                 <Image
                   src={post.frontMatter.image || placeholderImage}
                   alt={post.frontMatter.title}
-                  width={400}
-                  height={400}
-                  className="rounded-lg w-full md:w-1/5"
+                  width={post.frontMatter.image.width || 400}
+                  height={post.frontMatter.image.height || 400}
+                  className="rounded-lg w-1/2 mx-auto md:mx-0 md:w-1/6"
                 />
                 <div>
                   <h2 className="text-xl font-bold text-blue-600 hover:underline">

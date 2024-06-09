@@ -1,0 +1,71 @@
+---
+title: FastAPI
+description: Nejrychlejší způsob, jak vytvořit API!
+date: 2024-06-03
+author: Bagros
+published: true
+image: /img/fastapi.svg
+---
+
+# FastAPI
+
+Potřebovali jste něky vytvořit API pro váš projekt / side-project?
+
+FastAPI je nejlepší volbou pro rychlé vytvoření API. FastAPI je moderní webový framework pro Python, který je založen na standardu OpenAPI a JSON Schema.
+
+## Instalace FastAPI
+
+Vytvoříme si lab `nextlabs:python` a připojíme se na něj pomocí SSH.
+
+```bash
+ssh root@ip_labu
+```
+
+Vytvoříme si složku pro náš projekt a vytvoříme virtuální prostředí.
+
+```bash
+mkdir fastapi
+cd fastapi
+virtualenv venv
+source venv/bin/activate
+```
+
+Nainstalujeme si FastAPI a další potřebné knihovny.
+
+```bash
+pip install fastapi uvicorn
+```
+
+## Vytvoření prvního endpointu
+
+Vytvoříme si soubor `main.py` a vložíme do něj následující kód.
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"Message": "Hello, World!"}
+```
+
+Spustíme náš server pomocí `uvicorn`.
+
+```bash
+uvicorn main:app --reload
+```
+
+Otevřeme si prohlížeč a zadejme `http://ip_labu:8000`. Měli bychom vidět následující odpověď.
+
+```json
+{
+  "Message": "Hello, World!"
+}
+```
+
+Úspěšně jste vytvořili první endpoint pomocí FastAPI!
+
+FastAPI také podporuje automatickou dokumentaci pomocí Swagger UI. Otevřete si `http://ip_labu:8000/docs` a uvidíte dokumentaci vašeho API, která se generuje automaticky.
+
+Pro více informací o FastAPI se podívejte na <a href="https://fastapi.tiangolo.com/" target="_blank">oficiální dokumentaci</a>.

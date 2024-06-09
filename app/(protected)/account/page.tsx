@@ -54,7 +54,6 @@ const Account = async () => {
             My Containers
           </h2>
           <div className="flex m-2 space-x-2">
-            {/* justify-between */}
             <CreateLab userEmail={userEmail} images={images} />
           </div>
           <div>

@@ -44,7 +44,7 @@ export default function Page() {
                   alt={post.frontMatter.title}
                   width={post.frontMatter.image.width || 400}
                   height={post.frontMatter.image.height || 400}
-                  className="rounded-lg w-1/2 mx-auto md:mx-0 md:w-1/6"
+                  className="rounded-lg w-1/2 mx-auto md:mx-0 md:w-1/6 px-4 lg:px-8"
                 />
                 <div>
                   <h2 className="text-xl font-bold text-blue-600 hover:underline">

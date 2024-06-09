@@ -108,17 +108,26 @@ const createContainer = async (userEmail: string, image: string) => {
     return { error: "You have reached the maximum number of containers" };
   }
 
-  const response = await fetch(
-    process.env.API_URL +
-      `/containers/?email=${userEmail}&container_image=${image}&public_key=${public_key}`,
-    {
-      method: "POST",
-      headers: { secret: process.env.API_KEY },
-      cache: "no-store",
-    }
-  );
+  const data = {
+    email: userEmail,
+    container_image: image,
+    public_key: public_key,
+  };
+  const response = await fetch(process.env.API_URL + "/containers/", {
+    method: "POST",
+    headers: {
+      secret: process.env.API_KEY,
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+    body: JSON.stringify(data),
+  });
 
   revalidateTag("collection");
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
   return response.json();
 };
 

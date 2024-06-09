@@ -4,6 +4,7 @@ description: Krátký úvod.
 date: 2024-06-03
 author: Bagros
 published: true
+image: https://nextlabs.cz/lab.svg
 ---
 
 # Úvod do NextLabs
@@ -12,50 +13,94 @@ Ahoj, vítej v NextLabs
 
 ## Co je NextLabs?
 
-NextLabs je platforma pro vzdělávání a testování v oblasti IT. Na této stránce můžete najít různé kurzy, testy a materiály, které vám pomohou zdokonalit vaše dovednosti v oblasti IT.
+NextLabs je platforma, která poskytuje `provisioning`. To znamená, že můžete vytvářet své vlastní laby, kde můžete testovat různé technologie a nástroje.
 
-**Krok 1: Připojení k VPN**
+## Nastavení SSH klíče
+
+### Vygenerování SSH klíče
+
+Pokud nemáte SSH klíč, můžete si ho vygenerovat pomocí následujícího příkazu:
+
+```bash
+ssh-keygen -t rsa -b 4096
+```
+
+Příkaz se vás zeptá, kam chcete klíč uložit. Pokud nechcete měnit cestu, stiskněte Enter.
+
+Poté se vás zeptá na heslo. Můžete ho nechat prázdné.
+
+Klíč se vygeneruje a uloží do `~/.ssh/id_rsa.pub`.
+
+### Naahrání SSH klíče
+
+Pokud už máte SSH klíč, stačí ho jen nahrát.
+
+Na Linuxu nebo MacOS, můžete použít následující příkaz:
+
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+
+Na Windows klíč najdete v `C:\Users\username\.ssh\id_rsa.pub`.
+
+Klíč vložíte do pole pro nahrání SSH klíče.
+
+![Upload SSH key](/img/upload-ssh-key.webp)
+
+<span class="text-red-700 font-bold">
+  Důležité: Nikdy nezveřejňujte svůj privátní klíč.
+</span>
+
+## Připojení k VPN
 
 1. Vygenerujte si svůj vpn client v [administraci](/account).
-2. Připojte se do VPN sítě pomocí OpenVPN klienta. Pokud nemáte OpenVPN klienta nainstalovaného, můžete si ho stáhnout [zde](https://openvpn.net/client/).
-3. Po připojení ověřte, že máte přístup do lab sítě. V prohlížeči zkuste načíst webový server v lab síti [zde](http://10.0.0.10).
 
-**Krok 2: Vytvoření labu**
+![Account panel](/img/account-panel.webp)
+
+2. Připojte se do VPN sítě pomocí OpenVPN klienta. Pokud nemáte OpenVPN klienta nainstalovaného, můžete si ho stáhnout <a href="https://openvpn.net/client/" target="_blank">zde</a>.
+3. Po připojení ověřte, že máte přístup do lab sítě. V prohlížeči zkuste načíst webový server v lab síti <a href="http://10.0.0.10/" target="_blank">zde</a>.
+
+## Vytvoření labu
 
 Pokud jste se úspěšně připojili do VPN, můžete pokračovat vytvořením svého labu.
 
-V administraci si vyberte lab, který chcete vytvořit a klikněte na tlačítko "Start lab".
+V administraci si vyberte lab, který chcete vytvořit a klikněte na tlačítko "Start!".
+
 Po chvíli se vám zobrazí informace o vašem labu, včetně IP adresy serveru. Tuto IP adresu budete potřebovat pro připojení k serveru pomocí SSH.
 
-Připojení k labu pomocí SSH:
+<img src="/img/lab.webp" />
+
+## Připojení k labu pomocí SSH:
+
+Ukážeme si, jak se připojit k serveru pomocí SSH a nastavit webový server Nginx.
 
 ```
 ssh root@server_ip
 ```
 
-**Krok 3: Aktualizace apt**
+### Aktualizace apt
 
-1. Po přihlášení k labu použijte následující příkaz pro aktualizaci apt balíčků:
+Po přihlášení k labu použijte následující příkaz pro aktualizaci apt balíčků:
 
 ```
 apt update
 ```
 
-**Krok 4: Instalace Nginx webového serveru**
+### Instalace Nginx webového serveru
 
-Po aktualizaci apt použijte následující příkaz k instalaci webového serveru Nginx:
+Použijte následující příkaz k instalaci webového serveru Nginx:
 
 ```
 apt install nginx
 ```
 
-Po aktualizaci spusťte Nginx pomocí následujícího příkazu:
+Spusťte Nginx pomocí následujícího příkazu:
 
 ```
 nginx
 ```
 
-**Krok 5: Nastavení vlastní HTML stránky**
+### Nastavení vlastní HTML stránky
 
 Použijte následující příkaz pro přesun do adresáře, kde jsou uloženy weby:
 
@@ -68,5 +113,7 @@ Upravte defaultní soubor `index.nginx-debian.html` pomocí textového editoru n
 ```
 nano index.nginx-debian.html
 ```
+
+Pro uložení změn stiskněte `Ctrl + X`. Uložíte změny `Y`. Potvrdíte cestu k souboru `Enter`.
 
 Poté v prohlížeči otevřete IP adresu vašeho serveru a uvidíte vaši novou HTML stránku.

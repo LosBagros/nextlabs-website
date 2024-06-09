@@ -98,7 +98,7 @@ export default function CreateLab({
           )}
         />
         <Button type="submit" disabled={isPending}>
-          Submit
+          Start!
         </Button>
       </form>
     </Form>
